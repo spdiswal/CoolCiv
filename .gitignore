@@ -1,0 +1,40 @@
+# This file, .gitignore, marks certain files and folders as excluded from version control.
+#
+# Read more:
+# https://git-scm.com/docs/gitignore
+# https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
+
+# Editors and IDEs.
+.idea/
+.vscode/
+
+# AsciiDoctor.
+.asciidoctor/
+.asciidoctorconfig
+
+# Local environment.
+*.local
+*.local.*
+
+# Dependency management (npm).
+node_modules/
+
+# Dependency management (Yarn).
+.yarn/*
+!.yarn/cache/
+!.yarn/patches/
+!.yarn/plugins/
+!.yarn/releases/
+!.yarn/sdks/
+!.yarn/versions/
+
+# Build artifacts.
+build/
+out/
+dist/
+*.log
+
+# Operating system artifacts.
+*~
+.DS_Store
+Thumbs.db
