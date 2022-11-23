@@ -5,8 +5,10 @@
 # https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # Editors and IDEs.
-.idea/
-.vscode/
+.idea/*
+!.idea/runConfigurations/
+.vscode/*
+!.vscode/launch.json
 
 # AsciiDoctor.
 .asciidoctor/
@@ -28,11 +30,16 @@ node_modules/
 !.yarn/sdks/
 !.yarn/versions/
 
+# Test artifacts.
+coverage/
+
 # Build artifacts.
 build/
 out/
 dist/
 *.log
+*.tsbuildinfo
+.eslintcache
 
 # Operating system artifacts.
 *~

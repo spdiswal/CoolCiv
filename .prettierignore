@@ -1,0 +1,24 @@
+# This file, .prettierignore, marks certain files and folders as excluded from formatting by Prettier.
+#
+# Read more:
+# https://prettier.io/docs/en/ignore.html
+
+# Editors and IDEs.
+.idea/
+.vscode/
+
+# Dependency management (npm).
+node_modules/
+
+# Dependency management (Yarn).
+.yarn/
+.pnp.cjs
+.pnp.loader.mjs
+
+# Test artifacts.
+coverage/
+
+# Build artifacts.
+build/
+out/
+dist/

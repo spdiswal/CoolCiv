@@ -5,7 +5,7 @@
 
 This repository contains the web-based CoolCiv project, which implements a HotCiv spin-off from _Flexible, Reliable Software_ by Henrik Bærbak Christensen.
 
-NOTE: All commands in this README document are to be executed from the project root directory (where this document resides).
+CAUTION: All commands in this README document are to be executed from the project root directory (where this document resides).
 
 == Get Started
 This project uses the https://yarnpkg.com/features/zero-installs[zero-install feature] of the Yarn package manager.
@@ -73,12 +73,27 @@ $ idea .
 
 . Install these plugins (menu:File[Settings > Plugins]):
 ** https://plugins.jetbrains.com/plugin/7391-asciidoc[AsciiDoc]
+** https://plugins.jetbrains.com/plugin/10456-prettier[Prettier]
 
 . Exclude these files from indexing (menu:File[Project Structure > Modules]):
 +
 [source]
 ----
-.yarn;build;.editorconfig;.gitattributes;.gitignore;.yarnrc.yml;yarn.lock
+.asciidoctor;.yarn;build;coverage;.asciidoctorconfig;.editorconfig;.eslintcache;.eslintignore;.gitattributes;.gitignore;.pnp.cjs;.pnp.loader.mjs;.prettierignore;.yarnrc.yml;yarn.lock
+----
+
+. Use Prettier as the formatter for these files: (menu:File[Settings > Languages & Frameworks > JavaScript > Prettier]):
++
+[source]
+----
+{**/*,*}.{cjs,css,html,json,mjs,ts,tsx}
+----
+
+. Enable automatic ESLint configuration for these files: (menu:File[Settings > Languages & Frameworks > JavaScript > Code Quality Tools > ESLint]):
++
+[source]
+----
+{**/*,*}.{cjs,mjs,ts,tsx}
 ----
 
 * *Visual Studio Code* users should open the project directory:
@@ -91,3 +106,46 @@ $ code .
 . Install these extensions (kbd:[Ctrl+Shift+X]):
 +
 ** https://marketplace.visualstudio.com/items?itemName=asciidoctor.asciidoctor-vscode[AsciiDoc]
+** https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint[ESLint]
+** https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode[Prettier]
+
+== Tasks
+The `scripts` field in `package.json` defines a set of work tasks.
+Corresponding IntelliJ IDEA configurations are located in `.idea/runConfigurations`.
+
+=== Start a Local Development Server
+[source,shell]
+----
+$ yarn run develop
+----
+
+Visit http://localhost:8000 to access the web app from your local computer.
+Use the LAN IP address printed in the console (usually something like `192.168.X.Y`) to access it from another device.
+
+=== Validate the Software Quality
+[source,shell]
+----
+$ yarn run validate
+----
+
+It runs the following means of validation:
+
+* *Type checking* via https://www.typescriptlang.org[TypeScript] (`validate:types`).
+* *Source code formatting* via https://prettier.io[Prettier] (`validate:format`).
+** `validate:format:fix` formats the source code files accordingly.
+* *Static program analysis* (linting) via https://eslint.org[ESLint] (`validate:lint`).
+** `validate:lint:fix` fixes certain issues automatically.
+* *Automated unit testing* via https://vitest.dev[Vitest] (`validate:test`).
+** `validate:test:coverage` creates a code coverage report in the `coverage` directory.
+** `validate:test:ui` launches the https://vitest.dev/guide/ui.html[Vitest user interface] in a web browser.
+** `validate:test:watch` makes the test suite run continuously.
+
+=== Build for Production
+[source,shell]
+----
+$ yarn run build
+----
+
+It saves the output in the `build` directory.
+
+* `build:preview` serves a preview at http://localhost:80.
