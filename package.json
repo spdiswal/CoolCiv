@@ -1,8 +1,75 @@
 {
+	"dependencies": {
+		"tslib": "2.4.1"
+	},
+	"dependenciesComments": {
+		"tslib": "A runtime library that optimises TypeScript applications."
+	},
+	"devDependencies": {
+		"@octokit/action": "4.0.10",
+		"@trivago/prettier-plugin-sort-imports": "3.4.0",
+		"@types/eslint": "8.4.10",
+		"@types/node": "18.11.9",
+		"@types/prettier": "2.7.1",
+		"@typescript-eslint/eslint-plugin": "5.44.0",
+		"@typescript-eslint/parser": "5.44.0",
+		"@vitest/coverage-c8": "0.25.3",
+		"@vitest/ui": "0.25.3",
+		"eslint": "8.28.0",
+		"eslint-plugin-eslint-comments": "3.2.0",
+		"eslint-plugin-functional": "4.4.1",
+		"eslint-plugin-jest": "27.1.5",
+		"eslint-plugin-redundant-undefined": "0.3.0",
+		"eslint-plugin-unicorn": "45.0.0",
+		"prettier": "2.7.1",
+		"simple-git-hooks": "2.8.1",
+		"typescript": "4.9.3",
+		"vite": "3.2.4",
+		"vitest": "0.25.3"
+	},
+	"devDependenciesComments": {
+		"@trivago/prettier-plugin-sort-imports": "A Prettier plugin that sorts import statements.",
+		"@types/eslint": "A set of type definitions for ESLint configuration files.",
+		"@types/node": "A set of type definitions for Node modules to be used in configuration files and test stubs.",
+		"@types/prettier": "A set of type definitions for Prettier configuration files.",
+		"@typescript-eslint/eslint-plugin": "An ESLint plugin that uncovers issues in TypeScript code. It must always match the version of '@typescript-eslint/parser'.",
+		"@typescript-eslint/parser": "An ESLint plugin that lets it parse TypeScript sources. It must always match the version of '@typescript-eslint/eslint-plugin'.",
+		"@vitest/coverage-c8": "A Vitest plugin that provides code coverage.",
+		"@vitest/ui": "A Vitest plugin that provides a user interface in the web browser.",
+		"eslint": "ESLint; a static program analysis tool that uncovers issues in JavaScript code.",
+		"eslint-plugin-eslint-comments": "An ESLint plugin that uncovers issues in the use of ESLint comments.",
+		"eslint-plugin-functional": "An ESLint plugin that encourages principles from the functional programming paradigm.",
+		"eslint-plugin-jest": "An ESLint plugin that uncovers issues in test suites in Jest (and Vitest whose API is compatible with that of Jest).",
+		"eslint-plugin-redundant-undefined": "An ESLint plugin that uncovers inconsistencies in optional type declarations.",
+		"eslint-plugin-unicorn": "An ESLint plugin that complements the built-in set of rules.",
+		"prettier": "Prettier; an opinionated code formatter that respects the '.editorconfig' file.",
+		"simple-git-hooks": "A tool that manages Git hooks, e.g. to validate the software quality before committing changes to the repository.",
+		"typescript": "TypeScript; a statically typed programming language that extends the JavaScript syntax.",
+		"vite": "Vite; a frontend build tool with native support for hot module replacement.",
+		"vitest": "Vitest; a unit testing framework that uses the Vite build configuration natively."
+	},
 	"packageManager": "yarn@3.3.0",
 	"private": true,
 	"scripts": {
-		"setup": "yarn run setup:install-dependencies",
-		"setup:install-dependencies": "yarn install"
+		"build": "vite build",
+		"build:preview": "vite preview",
+		"develop": "vite serve",
+		"setup": "yarn run setup:install-dependencies && yarn run setup:install-git-hooks",
+		"setup:install-dependencies": "yarn install",
+		"setup:install-git-hooks": "simple-git-hooks",
+		"validate": "yarn run validate:types && yarn run validate:format && yarn run validate:lint && yarn run validate:test",
+		"validate:format": "yarn run validate:format:__base__ --check",
+		"validate:format:fix": "yarn run validate:format:__base__ --list-different --write",
+		"validate:format:__base__": "prettier ./**/*.{cjs,css,html,json,mjs,ts,tsx} .eslintrc.cjs",
+		"validate:lint": "eslint --max-warnings 0 --cache ./**/*.{cjs,mjs,ts,tsx} .eslintrc.cjs",
+		"validate:lint:fix": "yarn run validate:lint --fix",
+		"validate:test": "vitest run",
+		"validate:test:coverage": "vitest --coverage",
+		"validate:test:ui": "vitest --ui --open false",
+		"validate:test:watch": "vitest watch",
+		"validate:types": "tsc"
+	},
+	"simple-git-hooks": {
+		"pre-commit": "yarn run validate"
 	}
 }

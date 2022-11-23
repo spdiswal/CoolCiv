@@ -1,0 +1,24 @@
+# This file, .eslintignore, marks certain files and folders as excluded from linting by ESLint.
+#
+# Read more:
+# https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file
+
+# Editors and IDEs.
+.idea/
+.vscode/
+
+# Dependency management (npm).
+node_modules/
+
+# Dependency management (Yarn).
+.yarn/
+.pnp.cjs
+.pnp.loader.mjs
+
+# Test artifacts.
+coverage/
+
+# Build artifacts.
+build/
+out/
+dist/
