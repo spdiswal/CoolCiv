@@ -8,7 +8,7 @@ describe("an AlphaCiv game", () => {
 
 	describe("that has just started", () => {
 		// GIVEN that the game has just started.
-		const { playerInTurn, worldAge } = game.initialState
+		const { playerInTurn, worldAge, worldLayout } = game.initialState
 
 		it("starts in 4000 BCE", () => {
 			// THEN the world age is 4000 BCE.
@@ -18,6 +18,138 @@ describe("an AlphaCiv game", () => {
 		it("starts with the red player in turn", () => {
 			// THEN the red player is in turn.
 			expect(playerInTurn).toBe("red")
+		})
+
+		describe("the terrain", () => {
+			it("has oceans at (1,0)", () => {
+				// THEN there are oceans at (1,0).
+				expect(worldLayout.terrainAt("1,0")).toBe("oceans")
+			})
+
+			it("has hills at (0,1)", () => {
+				// THEN there are hills at (0,1).
+				expect(worldLayout.terrainAt("0,1")).toBe("hills")
+			})
+
+			it("has mountains at (2,2)", () => {
+				// THEN there are mountains at (2,2).
+				expect(worldLayout.terrainAt("2,2")).toBe("mountains")
+			})
+
+			it("has plains at (0,0)", () => {
+				// THEN there are plains at (0,0).
+				expect(worldLayout.terrainAt("0,0")).toBe("plains")
+			})
+
+			it("has plains at (3,3)", () => {
+				// THEN there are plains at (3,3).
+				expect(worldLayout.terrainAt("3,3")).toBe("plains")
+			})
+
+			it("has plains at (15,15)", () => {
+				// THEN there are plains at (15,15).
+				expect(worldLayout.terrainAt("15,15")).toBe("plains")
+			})
+		})
+
+		describe("the city at (1,1)", () => {
+			const city = worldLayout.cityAt("1,1")
+
+			it("is owned by the red player", () => {
+				// THEN there is a red city at (1,1).
+				expect(city).not.toBeNull()
+				expect(city?.owner).toBe("red")
+			})
+
+			it("has a population of 1", () => {
+				// THEN there is a city at (1,1) with a population of 1.
+				expect(city).not.toBeNull()
+				expect(city?.populationSize).toBe(1)
+			})
+		})
+
+		describe("the city at (4,1)", () => {
+			const city = worldLayout.cityAt("4,1")
+
+			it("is owned by the blue player", () => {
+				// THEN there is a blue city at (4,1).
+				expect(city).not.toBeNull()
+				expect(city?.owner).toBe("blue")
+			})
+
+			it("has a population of 1", () => {
+				// THEN there is a city at (4,1) with a population of 1.
+				expect(city).not.toBeNull()
+				expect(city?.populationSize).toBe(1)
+			})
+		})
+
+		it("has no city at (2,1)", () => {
+			// THEN there is no city at (2,1).
+			expect(worldLayout.cityAt("2,1")).toBeNull()
+		})
+
+		it("has no city at (5,0)", () => {
+			// THEN there is no city at (5,0).
+			expect(worldLayout.cityAt("5,0")).toBeNull()
+		})
+
+		describe("the unit at (2,0)", () => {
+			const unit = worldLayout.unitAt("2,0")
+
+			it("is owned by the red player", () => {
+				// THEN there is a red unit at (2,0).
+				expect(unit).not.toBeNull()
+				expect(unit?.owner).toBe("red")
+			})
+
+			it("is an archer", () => {
+				// THEN there is an archer at (2,0).
+				expect(unit).not.toBeNull()
+				expect(unit?.type).toBe("archer")
+			})
+		})
+
+		describe("the unit at (3,2)", () => {
+			const unit = worldLayout.unitAt("3,2")
+
+			it("is owned by the blue player", () => {
+				// THEN there is a blue unit at (3,2).
+				expect(unit).not.toBeNull()
+				expect(unit?.owner).toBe("blue")
+			})
+
+			it("is a legion", () => {
+				// THEN there is a legion at (3,2).
+				expect(unit).not.toBeNull()
+				expect(unit?.type).toBe("legion")
+			})
+		})
+
+		describe("the unit at (4,3)", () => {
+			const unit = worldLayout.unitAt("4,3")
+
+			it("is owned by the red player", () => {
+				// THEN there is a red unit at (4,3).
+				expect(unit).not.toBeNull()
+				expect(unit?.owner).toBe("red")
+			})
+
+			it("is a settler", () => {
+				// THEN there is a settler at (4,3).
+				expect(unit).not.toBeNull()
+				expect(unit?.type).toBe("settler")
+			})
+		})
+
+		it("has no unit at (2,1)", () => {
+			// THEN there is no unit at (2,1).
+			expect(worldLayout.unitAt("2,1")).toBeNull()
+		})
+
+		it("has no unit at (5,0)", () => {
+			// THEN there is no unit at (5,0).
+			expect(worldLayout.unitAt("5,0")).toBeNull()
 		})
 	})
 
