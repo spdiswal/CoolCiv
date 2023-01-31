@@ -15,13 +15,13 @@ jobs:
             -   name: Install dependencies
                 run: yarn install --immutable
             -   name: Check types
-                run: yarn run validate:types
+                run: yarn run validate.types
             -   name: Verify the source code format
-                run: yarn run validate:format
+                run: yarn run validate.format
             -   name: Lint
-                run: yarn run validate:lint
+                run: yarn run validate.lint
             -   name: Run the unit tests
-                run: yarn run validate:test
+                run: yarn run validate.test
 #    verify-commit-messages:
 #        name: Verify the commit messages
 #        runs-on: ubuntu-latest

@@ -4,24 +4,26 @@
 # https://git-scm.com/docs/gitignore
 # https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
-# Editors and IDEs.
+# IntelliJ IDEA.
 .idea/*
+!.idea/jsLinters/
 !.idea/runConfigurations/
+!.idea/*.iml
+!.idea/externalDependencies.xml
+!.idea/modules.xml
+!.idea/prettier.xml
+
+# Visual Studio Code.
 .vscode/*
-!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
 
 # AsciiDoctor.
 .asciidoctor/
 .asciidoctorconfig
 
-# Local environment.
-*.local
-*.local.*
-
-# Dependency management (npm).
-node_modules/
-
-# Dependency management (Yarn).
+# Dependency management.
 .yarn/*
 !.yarn/cache/
 !.yarn/patches/
@@ -29,16 +31,11 @@ node_modules/
 !.yarn/releases/
 !.yarn/sdks/
 !.yarn/versions/
+node_modules/
 
-# Test artifacts.
+# Build and test artifacts.
 coverage/
-
-# Build artifacts.
 build/
-out/
-dist/
-*.log
-*.tsbuildinfo
 .eslintcache
 
 # Operating system artifacts.

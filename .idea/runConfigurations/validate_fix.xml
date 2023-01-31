@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="setup:install-dependencies" type="js.build_tools.npm" nameIsGenerated="true">
+  <configuration default="false" name="validate.fix" type="js.build_tools.npm" nameIsGenerated="true">
     <package-json value="$PROJECT_DIR$/package.json" />
     <command value="run" />
     <scripts>
-      <script value="setup:install-dependencies" />
+      <script value="validate.fix" />
     </scripts>
     <node-interpreter value="project" />
     <envs />
