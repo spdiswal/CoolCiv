@@ -1,5 +1,5 @@
-import type { DigitX1, DigitX2, DigitX3, DigitX4 } from "../../utilities"
-import { defineTypeFlavour } from "../../utilities"
+import type { DigitX1, DigitX2, DigitX3, DigitX4 } from "+utilities"
+import { defineTypeFlavour } from "+utilities"
 
 const flavour = defineTypeFlavour("Year")
 
