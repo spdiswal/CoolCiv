@@ -1,3 +1,7 @@
+import type { Player } from "./game/turn-taking"
+import { createYearFromString } from "./game/world-age"
+import type { Year } from "./game/world-age"
+
 export type Game = {
 	readonly computeNextTurn: (currentState: GameState) => GameState
 }
@@ -6,9 +10,6 @@ export type GameState = {
 	readonly currentPlayer: Player
 	readonly currentYear: Year
 }
-
-export type Player = "blue" | "red"
-export type Year = number
 
 export function composeAlphaCivGame(): Game {
 	const yearsToAdvancePerRound = 100
@@ -23,7 +24,7 @@ export function composeAlphaCivGame(): Game {
 					}
 				case "blue":
 					return {
-						currentYear: currentState.currentYear + yearsToAdvancePerRound,
+						currentYear: currentState.currentYear.plus(yearsToAdvancePerRound),
 						currentPlayer: "red",
 					}
 			}
@@ -34,6 +35,6 @@ export function composeAlphaCivGame(): Game {
 export function createInitialGameState(): GameState {
 	return {
 		currentPlayer: "red",
-		currentYear: -4000,
+		currentYear: createYearFromString("4000 BCE"),
 	}
 }

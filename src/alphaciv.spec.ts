@@ -1,5 +1,8 @@
-import type { GameState, Player, Year } from "./game"
+import type { GameState } from "./game"
 import { composeAlphaCivGame, createInitialGameState } from "./game"
+import type { Player } from "./game/turn-taking"
+import type { YearString } from "./game/world-age"
+import { createYearFromString } from "./game/world-age"
 
 describe("an AlphaCiv game", () => {
 	describe("world age", () => {
@@ -8,8 +11,8 @@ describe("an AlphaCiv game", () => {
 			const gameState = createInitialGameState()
 
 			// THEN the current year is 4000 BCE initially.
-			const expectedYear: Year = -4000
-			expect(gameState.currentYear).toBe(expectedYear)
+			const expectedYear: YearString = "4000 BCE"
+			expect(gameState.currentYear.toString()).toBe(expectedYear)
 		})
 
 		it("the world age is 3900 BCE after Blue completes their first turn", () => {
@@ -17,15 +20,15 @@ describe("an AlphaCiv game", () => {
 			const game = composeAlphaCivGame()
 			const currentState: GameState = aGameState({
 				currentPlayer: "blue",
-				currentYear: -4000,
+				currentYear: createYearFromString("4000 BCE"),
 			})
 
 			// WHEN
 			const newState = game.computeNextTurn(currentState)
 
 			// THEN
-			const expectedYear: Year = -3900
-			expect(newState.currentYear).toBe(expectedYear)
+			const expectedYear: YearString = "3900 BCE"
+			expect(newState.currentYear.toString()).toBe(expectedYear)
 		})
 
 		it("the world age is 3800 BCE after turn 2", () => {
@@ -33,15 +36,15 @@ describe("an AlphaCiv game", () => {
 			const game = composeAlphaCivGame()
 			const currentState: GameState = aGameState({
 				currentPlayer: "blue",
-				currentYear: -3900,
+				currentYear: createYearFromString("3900 BCE"),
 			})
 
 			// WHEN
 			const newState = game.computeNextTurn(currentState)
 
 			// THEN
-			const expectedYear: Year = -3800
-			expect(newState.currentYear).toBe(expectedYear)
+			const expectedYear: YearString = "3800 BCE"
+			expect(newState.currentYear.toString()).toBe(expectedYear)
 		})
 	})
 
@@ -62,7 +65,7 @@ describe("an AlphaCiv game", () => {
 			// WHEN
 			const newState = game.computeNextTurn({
 				currentPlayer: "red",
-				currentYear: -4000,
+				currentYear: createYearFromString("4000 BCE"),
 			})
 
 			// THEN
@@ -88,7 +91,7 @@ describe("an AlphaCiv game", () => {
 function aGameState(overrides: Partial<GameState>): GameState {
 	const defaultState: GameState = {
 		currentPlayer: "red",
-		currentYear: -4000,
+		currentYear: createYearFromString("4000 BCE"),
 	}
 
 	return { ...defaultState, ...overrides }
