@@ -10,6 +10,7 @@ export type Game = {
 
 export type GameState = {
 	readonly playerInTurn: Player
+	readonly winner: Player | null
 	readonly worldAge: Year
 	readonly worldLayout: WorldLayout
 }
@@ -20,6 +21,7 @@ export function createGame(): Game {
 	return {
 		initialState: {
 			playerInTurn: "red",
+			winner: null,
 			worldAge: createYearFromString("4000 BCE"),
 			worldLayout: {
 				terrainAt: (positionString) => {
@@ -68,6 +70,9 @@ export function createGame(): Game {
 				case "blue":
 					return {
 						...currentState,
+						winner:
+							currentState.winner ??
+							(currentState.worldAge.toString() === "3100 BCE" ? "red" : null),
 						worldAge: currentState.worldAge.plus(yearsToAdvancePerRound),
 						playerInTurn: "red",
 					}

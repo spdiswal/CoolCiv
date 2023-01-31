@@ -8,7 +8,7 @@ describe("an AlphaCiv game", () => {
 
 	describe("that has just started", () => {
 		// GIVEN that the game has just started.
-		const { playerInTurn, worldAge, worldLayout } = game.initialState
+		const { playerInTurn, winner, worldAge, worldLayout } = game.initialState
 
 		it("starts in 4000 BCE", () => {
 			// THEN the world age is 4000 BCE.
@@ -18,6 +18,11 @@ describe("an AlphaCiv game", () => {
 		it("starts with the red player in turn", () => {
 			// THEN the red player is in turn.
 			expect(playerInTurn).toBe("red")
+		})
+
+		it("has not declared a winner yet", () => {
+			// THEN there is no winner.
+			expect(winner).toBeNull()
 		})
 
 		describe("the terrain", () => {
@@ -217,6 +222,36 @@ describe("an AlphaCiv game", () => {
 		})
 	})
 
+	describe("after nine rounds", () => {
+		// GIVEN that the game has advanced nine rounds.
+		const { winner } = advanceNineRounds(game.initialState)
+
+		it("has not declared a winner yet", () => {
+			// THEN there is no winner.
+			expect(winner).toBeNull()
+		})
+	})
+
+	describe("after ten rounds", () => {
+		// GIVEN that the game has advanced ten rounds.
+		const { winner } = advanceTenRounds(game.initialState)
+
+		it("declares the red player as the winner", () => {
+			// THEN the red player has won.
+			expect(winner).toBe("red")
+		})
+	})
+
+	describe("after eleven rounds", () => {
+		// GIVEN that the game has advanced eleven rounds.
+		const { winner } = advanceElevenRounds(game.initialState)
+
+		it("retains the red player as the winner", () => {
+			// THEN the red player has won.
+			expect(winner).toBe("red")
+		})
+	})
+
 	function advanceOneRound(state: GameState): GameState {
 		return game.nextTurn(game.nextTurn(state))
 	}
@@ -227,5 +262,17 @@ describe("an AlphaCiv game", () => {
 
 	function advanceThreeRounds(state: GameState): GameState {
 		return advanceOneRound(advanceOneRound(advanceOneRound(state)))
+	}
+
+	function advanceNineRounds(state: GameState): GameState {
+		return advanceThreeRounds(advanceThreeRounds(advanceThreeRounds(state)))
+	}
+
+	function advanceTenRounds(state: GameState): GameState {
+		return advanceOneRound(advanceNineRounds(state))
+	}
+
+	function advanceElevenRounds(state: GameState): GameState {
+		return advanceOneRound(advanceTenRounds(state))
 	}
 })
