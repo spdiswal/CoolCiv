@@ -1,6 +1,3 @@
-import type { Digit } from "+utilities"
+import type { Range0To15 } from "+utilities"
 
-export type PositionString = `${Row},${Column}`
-
-type Row = Digit | 10 | 11 | 12 | 13 | 14 | 15
-type Column = Digit | 10 | 11 | 12 | 13 | 14 | 15
+export type PositionString = `${Range0To15},${Range0To15}`

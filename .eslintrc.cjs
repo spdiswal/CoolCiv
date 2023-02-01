@@ -563,6 +563,7 @@ const typescriptConfiguration = {
 	},
 	plugins: ["@typescript-eslint", "redundant-undefined"],
 	rules: {
+		"no-inner-declarations": "off", // Allows non-exported function declarations in namespaces.
 		"no-restricted-syntax": [
 			"error",
 			{

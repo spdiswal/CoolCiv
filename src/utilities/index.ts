@@ -1,2 +1,2 @@
-export * from "./Digit"
+export * from "./Range"
 export * from "./TypeFlavour"

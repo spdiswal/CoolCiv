@@ -1,6 +1,5 @@
 import type { Player } from "+game/turn-taking"
-import type { Year } from "+game/world-age"
-import { createYearFromString } from "+game/world-age"
+import type { WorldAge, WorldAgeStrategy } from "+game/world-age"
 import type { WorldLayout } from "+game/world-layout"
 
 export type Game = {
@@ -11,18 +10,20 @@ export type Game = {
 export type GameState = {
 	readonly playerInTurn: Player
 	readonly winner: Player | null
-	readonly worldAge: Year
+	readonly worldAge: WorldAge
 	readonly worldLayout: WorldLayout
 }
 
-export function createGame(): Game {
-	const yearsToAdvancePerRound = 100
+export type GameDependencies = {
+	readonly worldAgeStrategy: WorldAgeStrategy
+}
 
+export function createGame({ worldAgeStrategy }: GameDependencies): Game {
 	return {
 		initialState: {
 			playerInTurn: "red",
 			winner: null,
-			worldAge: createYearFromString("4000 BCE"),
+			worldAge: worldAgeStrategy.initialWorldAge,
 			worldLayout: {
 				terrainAt: (positionString) => {
 					switch (positionString) {
@@ -61,21 +62,22 @@ export function createGame(): Game {
 			},
 		},
 		nextTurn: (currentState) => {
+			function nextRound(): GameState {
+				return {
+					...currentState,
+					playerInTurn: "red",
+					winner:
+						currentState.winner ??
+						(currentState.worldAge.toString() === "3100 BCE" ? "red" : null),
+					worldAge: worldAgeStrategy.nextWorldAge(currentState.worldAge),
+				}
+			}
+
 			switch (currentState.playerInTurn) {
 				case "red":
-					return {
-						...currentState,
-						playerInTurn: "blue",
-					}
+					return { ...currentState, playerInTurn: "blue" }
 				case "blue":
-					return {
-						...currentState,
-						winner:
-							currentState.winner ??
-							(currentState.worldAge.toString() === "3100 BCE" ? "red" : null),
-						worldAge: currentState.worldAge.plus(yearsToAdvancePerRound),
-						playerInTurn: "red",
-					}
+					return nextRound()
 			}
 		},
 	}

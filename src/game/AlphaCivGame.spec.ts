@@ -252,6 +252,16 @@ describe("an AlphaCiv game", () => {
 		})
 	})
 
+	describe("after 150 rounds", () => {
+		// GIVEN that the game has advanced 150 rounds.
+		const { worldAge: nextWorldAge } = advance150Rounds(game.initialState)
+
+		it("stays at 9999 CE", () => {
+			// THEN the world age is 9999 CE.
+			expect(nextWorldAge.toString()).toBe("9999 CE")
+		})
+	})
+
 	function advanceOneRound(state: GameState): GameState {
 		return game.nextTurn(game.nextTurn(state))
 	}
@@ -274,5 +284,17 @@ describe("an AlphaCiv game", () => {
 
 	function advanceElevenRounds(state: GameState): GameState {
 		return advanceOneRound(advanceTenRounds(state))
+	}
+
+	function advance50Rounds(state: GameState): GameState {
+		return advanceTenRounds(
+			advanceTenRounds(
+				advanceTenRounds(advanceTenRounds(advanceTenRounds(state))),
+			),
+		)
+	}
+
+	function advance150Rounds(state: GameState): GameState {
+		return advance50Rounds(advance50Rounds(advance50Rounds(state)))
 	}
 })
