@@ -11,7 +11,7 @@ const viteConfig = defineConfig({
 		chunkSizeWarningLimit: 256 /* kilobytes */,
 		emptyOutDir: true,
 		minify: "esbuild",
-		outDir: resolve(__dirname, "build"),
+		outDir: inProjectDirectory("build"),
 		reportCompressedSize: false,
 	},
 	preview: {
@@ -20,6 +20,15 @@ const viteConfig = defineConfig({
 		strictPort: true,
 	},
 	publicDir: false,
+	resolve: {
+		alias: {
+			"+game": inProjectDirectory("src/game/"),
+			"+game/turn-taking": inProjectDirectory("src/game/turn-taking/"),
+			"+game/world-age": inProjectDirectory("src/game/world-age/"),
+			"+game/world-layout": inProjectDirectory("src/game/world-layout/"),
+			"+utilities": inProjectDirectory("src/utilities/"),
+		},
+	},
 	server: {
 		host: "0.0.0.0",
 		port: 8000,
@@ -34,5 +43,9 @@ const viteConfig = defineConfig({
 		include: ["**/*.spec.{ts,tsx}"],
 	},
 })
+
+function inProjectDirectory(relativeToProjectRoot: string): string {
+	return resolve(__dirname, relativeToProjectRoot)
+}
 
 export default viteConfig

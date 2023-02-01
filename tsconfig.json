@@ -15,7 +15,13 @@
 		"module": "ES2020",
 		"moduleResolution": "Node",
 		"noEmit": true,
-		"paths": {},
+		"paths": {
+			"+game": ["src/game/index"],
+			"+game/turn-taking": ["src/game/turn-taking/index"],
+			"+game/world-age": ["src/game/world-age/index"],
+			"+game/world-layout": ["src/game/world-layout/index"],
+			"+utilities": ["src/utilities/index"]
+		},
 		"resolveJsonModule": true,
 		"skipLibCheck": true,
 		"sourceMap": true,
