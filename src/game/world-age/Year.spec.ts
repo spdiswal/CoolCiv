@@ -40,7 +40,7 @@ describe("years", () => {
 
 			// THEN the result is computed accordingly.
 			expect(nextYear.toString()).toBe(expected)
-		}
+		},
 	)
 
 	it("rejects advancing by 0.5 year", () => {

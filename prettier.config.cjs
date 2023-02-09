@@ -3,8 +3,9 @@
  * @see https://prettier.io/docs/en/configuration.html
  */
 const prettierConfig = {
-	plugins: ["@trivago/prettier-plugin-sort-imports"],
+	plugins: ["prettier-plugin-organize-imports"],
 	semi: false,
+	trailingComma: "all",
 }
 
 module.exports = prettierConfig
