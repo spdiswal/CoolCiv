@@ -48,7 +48,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:2.4.1"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
             ["vite", "virtual:0270c770f7c5cccb275859acb4ad83b7920d6085639697aa24f6a46ebaa9f3af065b7ec5a13723632da3ca171cdeadf6fc5b1bd6ed77a181f523c92aceefa660#npm:3.2.4"],\
-            ["vitest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.25.3"]\
+            ["vitest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.25.3"],\
+            ["zod", "npm:3.20.6"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -3463,7 +3464,8 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["tslib", "npm:2.4.1"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
             ["vite", "virtual:0270c770f7c5cccb275859acb4ad83b7920d6085639697aa24f6a46ebaa9f3af065b7ec5a13723632da3ca171cdeadf6fc5b1bd6ed77a181f523c92aceefa660#npm:3.2.4"],\
-            ["vitest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.25.3"]\
+            ["vitest", "virtual:dc3fc578bfa5e06182a4d2be39ede0bc5b74940b1ffe0d70c26892ab140a4699787750fba175dc306292e80b4aa2c8c5f68c2a821e69b2c37e360c0dff36ff66#npm:0.25.3"],\
+            ["zod", "npm:3.20.6"]\
           ],\
           "linkType": "SOFT"\
         }]\
@@ -4309,6 +4311,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/yocto-queue-npm-0.1.0-c6c9a7db29-f77b3d8d00.zip/node_modules/yocto-queue/",\
           "packageDependencies": [\
             ["yocto-queue", "npm:0.1.0"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["zod", [\
+        ["npm:3.20.6", {\
+          "packageLocation": "./.yarn/cache/zod-npm-3.20.6-d9ed055758-804b1934b8.zip/node_modules/zod/",\
+          "packageDependencies": [\
+            ["zod", "npm:3.20.6"]\
           ],\
           "linkType": "HARD"\
         }]\
