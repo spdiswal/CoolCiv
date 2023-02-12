@@ -30,5 +30,20 @@
 		"useDefineForClassFields": true
 	},
 	"exclude": [".yarn", "build", "coverage", "node_modules"],
-	"include": ["**/*.cjs", "**/*.mjs", "**/*.ts", "**/*.tsx"]
+	"include": [
+		"**/*.cjs",
+		"**/*.js",
+		"**/*.jsx",
+		"**/*.mjs",
+		"**/*.ts",
+		"**/*.tsx",
+		//
+		// Include files in directories with a leading dot (i.e. hidden directories).
+		"**/.*/**/*.cjs",
+		"**/.*/**/*.js",
+		"**/.*/**/*.jsx",
+		"**/.*/**/*.mjs",
+		"**/.*/**/*.ts",
+		"**/.*/**/*.tsx"
+	]
 }
