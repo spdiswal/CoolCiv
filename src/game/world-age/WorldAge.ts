@@ -3,17 +3,20 @@ import { defineTypeFlavour } from "+utilities"
 
 const flavour = defineTypeFlavour("WorldAge")
 
-export type WorldAge = typeof flavour & {
-	readonly isBefore: (worldAge: WorldAgeString) => boolean
-	readonly advancedBy: (years: number) => WorldAge
-	readonly toString: () => WorldAgeString
-}
+export type WorldAge = Readonly<{
+	equals: (worldAge: WorldAgeString) => boolean
+	isBefore: (worldAge: WorldAgeString) => boolean
+	advancedBy: (years: number) => WorldAge
+	toString: () => WorldAgeString
+}> &
+	typeof flavour
 
 export type WorldAgeString = `${Range0To9999} CE` | `${Range1To9999} BCE`
 
 export namespace WorldAge {
 	const max: WorldAge = {
 		...flavour,
+		equals: (worldAge) => worldAge === "9999 CE",
 		isBefore: () => false,
 		advancedBy: () => max,
 		toString: () => "9999 CE",
@@ -23,6 +26,7 @@ export namespace WorldAge {
 		return fromYearValue(getYearValue(value))
 	}
 
+	// eslint-disable-next-line no-inner-declarations -- Temporarily disabled until it has been rewritten to a class.
 	function fromYearValue(yearValue: number): WorldAge {
 		const worldAgeString = (
 			yearValue < 0 ? `${-yearValue} BCE` : `${yearValue} CE`
@@ -30,6 +34,7 @@ export namespace WorldAge {
 
 		return {
 			...flavour,
+			equals: (worldAge) => worldAge === worldAgeString,
 			isBefore: (worldAge) => yearValue < getYearValue(worldAge),
 			advancedBy: (years) => {
 				if (!Number.isInteger(years) || years <= 0) {
@@ -49,9 +54,10 @@ export namespace WorldAge {
 		}
 	}
 
+	// eslint-disable-next-line no-inner-declarations -- Temporarily disabled until it has been rewritten to a class.
 	function getYearValue(value: WorldAgeString): number {
 		const [yearString, suffix] = value.split(" ")
-		const year = Number.parseInt(yearString, 10)
+		const year = Number.parseInt(yearString)
 
 		return suffix === "BCE" ? -year : year
 	}

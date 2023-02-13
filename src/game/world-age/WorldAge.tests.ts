@@ -2,7 +2,7 @@ import type { WorldAgeString } from "./WorldAge"
 import { WorldAge } from "./WorldAge"
 
 describe("a world age", () => {
-	it.each<{ readonly value: WorldAgeString }>([
+	it.each<Readonly<{ value: WorldAgeString }>>([
 		{ value: "9999 BCE" },
 		{ value: "3456 BCE" },
 		{ value: "999 BCE" },
@@ -29,11 +29,13 @@ describe("a world age", () => {
 		expect(worldAge.toString()).toBe(value)
 	})
 
-	it.each<{
-		readonly current: WorldAgeString
-		readonly yearsToAdvance: number
-		readonly expected: WorldAgeString
-	}>([
+	it.each<
+		Readonly<{
+			current: WorldAgeString
+			yearsToAdvance: number
+			expected: WorldAgeString
+		}>
+	>([
 		{ current: "4000 BCE", yearsToAdvance: 100, expected: "3900 BCE" },
 		{ current: "150 BCE", yearsToAdvance: 50, expected: "100 BCE" },
 		{ current: "10 BCE", yearsToAdvance: 10, expected: "0 CE" },
@@ -55,9 +57,7 @@ describe("a world age", () => {
 		},
 	)
 
-	it.each<{
-		readonly yearsToAdvance: number
-	}>([
+	it.each<Readonly<{ yearsToAdvance: number }>>([
 		{ yearsToAdvance: -5 },
 		{ yearsToAdvance: -1 },
 		{ yearsToAdvance: 0 },

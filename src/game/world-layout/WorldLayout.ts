@@ -3,8 +3,8 @@ import type { PositionString } from "./Position"
 import type { Terrain } from "./Terrain"
 import type { Unit } from "./Unit"
 
-export type WorldLayout = {
-	readonly cityAt: (position: PositionString) => City | null
-	readonly terrainAt: (position: PositionString) => Terrain
-	readonly unitAt: (position: PositionString) => Unit | null
-}
+export type WorldLayout = Readonly<{
+	cityAt: (position: PositionString) => City | null
+	terrainAt: (position: PositionString) => Terrain
+	unitAt: (position: PositionString) => Unit | null
+}>

@@ -1,6 +1,6 @@
 import type { WorldAge } from "+game/world-age"
 
-export type WorldAgeStrategy = {
-	readonly initialWorldAge: WorldAge
-	readonly nextWorldAge: (currentWorldAge: WorldAge) => WorldAge
-}
+export type WorldAgeStrategy = Readonly<{
+	initialWorldAge: WorldAge
+	nextWorldAge: (currentWorldAge: WorldAge) => WorldAge
+}>

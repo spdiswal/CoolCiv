@@ -2,21 +2,21 @@ import type { Player } from "+game/turn-taking"
 import type { WorldAge, WorldAgeStrategy } from "+game/world-age"
 import type { WorldLayout } from "+game/world-layout"
 
-export type Game = {
-	readonly initialState: GameState
-	readonly nextTurn: (currentState: GameState) => GameState
-}
+export type Game = Readonly<{
+	initialState: GameState
+	nextTurn: (currentState: GameState) => GameState
+}>
 
-export type GameState = {
-	readonly playerInTurn: Player
-	readonly winner: Player | null
-	readonly worldAge: WorldAge
-	readonly worldLayout: WorldLayout
-}
+export type GameState = Readonly<{
+	playerInTurn: Player
+	winner: Player | null
+	worldAge: WorldAge
+	worldLayout: WorldLayout
+}>
 
-export type GameDependencies = {
-	readonly worldAgeStrategy: WorldAgeStrategy
-}
+export type GameDependencies = Readonly<{
+	worldAgeStrategy: WorldAgeStrategy
+}>
 
 export function createGame({ worldAgeStrategy }: GameDependencies): Game {
 	return {
@@ -27,36 +27,47 @@ export function createGame({ worldAgeStrategy }: GameDependencies): Game {
 			worldLayout: {
 				terrainAt: (positionString) => {
 					switch (positionString) {
-						case "0,1":
+						case "0,1": {
 							return "hills"
-						case "1,0":
+						}
+						case "1,0": {
 							return "oceans"
-						case "2,2":
+						}
+						case "2,2": {
 							return "mountains"
-						default:
+						}
+						default: {
 							return "plains"
+						}
 					}
 				},
 				cityAt: (positionString) => {
 					switch (positionString) {
-						case "1,1":
+						case "1,1": {
 							return { owner: "red", populationSize: 1 }
-						case "4,1":
+						}
+						case "4,1": {
 							return { owner: "blue", populationSize: 1 }
-						default:
+						}
+						default: {
 							return null
+						}
 					}
 				},
 				unitAt: (positionString) => {
 					switch (positionString) {
-						case "2,0":
+						case "2,0": {
 							return { owner: "red", type: "archer" }
-						case "3,2":
+						}
+						case "3,2": {
 							return { owner: "blue", type: "legion" }
-						case "4,3":
+						}
+						case "4,3": {
 							return { owner: "red", type: "settler" }
-						default:
+						}
+						default: {
 							return null
+						}
 					}
 				},
 			},
@@ -74,10 +85,12 @@ export function createGame({ worldAgeStrategy }: GameDependencies): Game {
 			}
 
 			switch (currentState.playerInTurn) {
-				case "red":
+				case "red": {
 					return { ...currentState, playerInTurn: "blue" }
-				case "blue":
+				}
+				case "blue": {
 					return nextRound()
+				}
 			}
 		},
 	}

@@ -10,10 +10,10 @@
 		"validate.fix": "yarn run validate.lint.fix && yarn run validate.format.fix",
 		"validate.format": "yarn run __validate.format.base__ --check",
 		"validate.format.fix": "yarn run __validate.format.base__ --list-different --write",
-		"__validate.format.base__": "prettier ./**/*.{cjs,css,html,js,json,jsx,mjs,ts,tsx,yaml,yml} .vscode .eslintrc.cjs --cache",
+		"__validate.format.base__": "prettier ./**/*.{cjs,css,html,js,json,jsx,mjs,ts,tsx,yaml,yml} .vscode --cache",
 		"validate.lint": "yarn run __validate.lint.base__",
 		"validate.lint.fix": "yarn run __validate.lint.base__ --fix",
-		"__validate.lint.base__": "eslint --max-warnings 0 --cache \"./**/*.{cjs,js,jsx,mjs,ts,tsx}\" .eslintrc.cjs",
+		"__validate.lint.base__": "eslint \"./**/*.{cjs,js,jsx,mjs,ts,tsx}\" --max-warnings 0 --cache",
 		"validate.test": "vitest run",
 		"validate.test.coverage": "vitest --coverage",
 		"validate.test.ui": "vitest --ui --open false",
@@ -77,5 +77,6 @@
 		"node": ">=18.0.0"
 	},
 	"packageManager": "yarn@3.3.0",
-	"private": true
+	"private": true,
+	"type": "module"
 }

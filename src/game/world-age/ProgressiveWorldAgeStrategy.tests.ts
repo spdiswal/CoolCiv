@@ -10,10 +10,12 @@ describe("the progressive world age strategy", () => {
 		expect(strategy.initialWorldAge.toString()).toBe("4000 BCE")
 	})
 
-	it.each<{
-		readonly current: WorldAgeString
-		readonly expected: WorldAgeString
-	}>([
+	it.each<
+		Readonly<{
+			current: WorldAgeString
+			expected: WorldAgeString
+		}>
+	>([
 		{ current: "4000 BCE", expected: "3900 BCE" },
 		{ current: "3900 BCE", expected: "3800 BCE" },
 		{ current: "200 BCE", expected: "100 BCE" },

@@ -1,5 +1,8 @@
-import { resolve } from "node:path"
+import { join as joinPath, resolve as resolvePath } from "node:path"
+import { fileURLToPath } from "node:url"
 import { defineConfig } from "vitest/config"
+
+const projectDirectory = joinPath(fileURLToPath(import.meta.url), "..")
 
 /**
  * @see https://vitejs.dev/config
@@ -40,12 +43,12 @@ const viteConfig = defineConfig({
 			reporter: ["html"],
 		},
 		globals: true, // Makes test cases compatible with Jest-related tooling, such as ESLint and Testing Library (for automatic cleanup).
-		include: ["**/*.spec.{ts,tsx}"],
+		include: ["**/*.tests.{ts,tsx}"],
 	},
 })
 
 function inProjectDirectory(relativeToProjectRoot: string): string {
-	return resolve(__dirname, relativeToProjectRoot)
+	return resolvePath(projectDirectory, relativeToProjectRoot)
 }
 
 export default viteConfig
